@@ -1,0 +1,165 @@
+git config --global user.name "xxx"      -- 配置用户名，上传本地 repository 到服务器上的时候，在 Github 上会显示这里配置的上传者信息
+git config --global user.email "xxx"     -- 配置邮箱
+git config --list        查看配置列表
+
+mkdir foldername
+
+cd foldername
+
+显示当前目录
+pwd
+
+把这个目录变成Git可以管理的仓库
+git init
+
+告诉Git，把文件添加到仓库
+git add filename
+
+git add file1name file2name
+
+git add foldername
+
+告诉Git，把文件提交到仓库
+git commit -m describe
+
+查看仓库当前的状态
+git status
+
+查看文件修改内容
+git diff filename
+
+查看历史记录
+git log
+
+git log --pretty=oneline
+
+回退到上一个版本
+设置git大小写敏感
+git config core.ignorecase false
+git reset --hard HEAD^
+
+在Git中，用HEAD表示当前版本，也就是最新的提交3628164...882e1e0（注意我的提交ID和你的肯定不一样），上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+
+git reset --hard id
+
+查看历史操作记录
+git reflog
+
+放弃修改，让这个文件回到最近一次git commit或git add时的状态
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态
+git checkout -- filename
+把暂存区的修改撤销掉（unstage），重新放回工作区
+git reset HEAD file
+
+从版本库中删除该文件
+git rm filename
+添加描述
+git commit -m describe
+git commit --amend 进行修改描述，完成后 :wq 退出
+要关联一个远程库
+git remote add origin git@github.com:username/foldername.git
+第一次推送master分支的所有内容
+git push -u origin master
+推送最新修改
+git push origin master
+用命令git clone克隆一个本地库
+git clone git@github.com:用户名/repository.git
+
+查看分支：git branch
+
+创建分支：git branch <name>
+
+切换分支：git checkout <name>
+
+创建+切换分支：git checkout -b <name>
+
+合并某分支到当前分支：git merge <name>
+
+删除分支：git branch -d <name>
+
+用带参数的git log也可以看到分支的合并情况：
+git log --graph --pretty=oneline --abbrev-commit
+
+合并dev分支，请注意--no-ff参数，表示禁用Fast forward
+git merge --no-ff -m "describe" dev
+
+把当前工作现场“储藏”起来，等以后恢复现场后继续工作：
+git stash
+git stash list命令看看
+
+工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：
+
+一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
+
+另一种方式是用git stash pop，恢复的同时把stash内容也删了
+
+你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
+
+$ git stash apply stash@{0}
+
+
+查看远程库信息，使用git remote -v；
+
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
+
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+
+命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+
+git tag <tagname> commit id
+
+git tag -a <tagname> -m "blablabla..." commit id可以指定标签信息；
+
+git tag -s <tagname> -m "blablabla..." commit id可以用PGP签名标签；
+
+命令git tag可以查看所有标签。
+
+git fetch --all  下载远程的库的内容，不做任何的合并
+git reset --hard origin/master  把HEAD指向刚刚下载的最新的版本
+
+
+
+git push 推送失败
+出现错误的主要原因是github中的README.md文件不在本地代码目录中
+
+　　可以通过如下命令进行代码合并【注：pull=fetch+merge]
+　　git pull --rebase origin master
+
+
+
+git移除远程连接
+git remote rm origin
+
+乱码
+git config --global core.quotepath false
+git config --global core.pager more
+//设置提交信息编码格式
+git config --global i18n.commitencoding gbk
+git config --global i18n.commitencoding utf-8
+//设置输出信息编码格式
+git config --global i18n.logoutputencoding gbk
+git config --global i18n.logoutputencoding utf-8
+export LESSCHARSET=utf-8
+
+
+fatal：refusing to merge unrelated histories.
+ 
+在命令git pull origin master后面加上一句“--allow-unrelated-histories”
+                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+
+
+
+
+
