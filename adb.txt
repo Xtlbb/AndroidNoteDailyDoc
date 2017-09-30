@@ -1,0 +1,86 @@
+adb -s 【devicesname】 shell
+adb shell ps  查看正在运行的程序
+adb root  root方式连接手机
+
+adb shell top -m 10 CPU使用率前10的程序
+
+adb shell cat /proc/APP_PID/oom_adj
+adb shell cat /proc/APP_PID/oom_score
+adb shell cat /proc/APP_PID/oom_scroe_adj
+
+adb remount - remounts the /system partition on the device read-write  获取文件夹system读写权限
+
+adb remount 
+
+adb shell cat proc/meminfo
+
+adb proc/meminfo
+
+adb shell  cat /sys/class/net/wlan0/address  //网卡MAC
+
+应用包名称可以用以下命令列出：
+
+adb shell pm list packages -f（带f显示完整路径）
+
+push *.h  data , adb shell , cd data , ./* Tab Enter
+
+
+ adb push F:\djf\workspace\2.2\wolf\svn\Family\VRAutoCycling11-1\app\build\outputs\apk\app-family-debug.apk /data/local/tmadb shell am start "com.android.settings/.Settings"p/com.ut.vrautocyclingfamily
+ 
+ adb shell pm install -r "/data/local/tmp/com.ut.vrautocyclingfamily"
+	pkg: /data/local/tmp/com.ut.vrautocyclingfamily
+Success
+
+
+$ adb shell am start -n "com.ut.vrautocyclingfamily/com.ut.vrautocycling.activity.SplashActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
+
+普通安装：
+adb install D:\Desktop\test.apk
+静默安装：
+adb push D:\Desktop\test.apk /sdcard/test.apk //复制安装包到手机
+adb shell pm install -f /sdcard/test.apk //使用PackageManager安装
+adb shell rm /sdcard/test.apk //从手机删除安装包
+
+
+查看当前activity
+
+adb  shell
+		logcat | grep ActivityManager  //查看当前activity
+		getevent						//获取输入事件
+	
+
+//启动状态栏设置界面
+adb shell am start "com.teamhd.settings/.MainActivity"
+//启动设置中心
+adb shell am start "com.android.settings/.Settings"
+//启动恢复出厂设置
+adb shell am start "com.android.settings/.SubSetting"
+
+拨号
+adb shell am start "com.android.dialer/.DialtactsActivity"
+
+
+
+//文件管理器,无效
+adb shell am start "com.estrongs.android.pop/.view.FileExploreActivity"
+
+adb shell am start "android/com.android.internal.app.ResolverActivity
+
+删除文件夹实例：
+rm -rf /var/log/httpd/access
+将会删除/var/log/httpd/access目录以及其下所有文件、文件夹
+
+删除文件使用实例：
+rm -f /var/log/httpd/access.log
+将会强制删除/var/log/httpd/access.log这个文件
+删除文件
+rm -rf ./com.sy.scereen/   (./是通配符)
+
+
+例子：将目录A重命名为B
+
+mv A B
+
+例子：将/a目录移动到/b下，并重命名为c
+
+mv /a /b/c
